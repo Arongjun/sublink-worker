@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="public/favicon.png" alt="Sublink Worker" width="120" height="120"/>
+  <img src="public/favicon.png" alt="Arong Vpnlink" width="120" height="120"/>
 
-  <h1><b>Sublink Worker</b></h1>
+  <h1><b>Arong Vpnlink</b></h1>
   <h5><i>One Worker, All Subscriptions</i></h5>
 
   <p><b>A lightweight subscription converter and manager for proxy protocols, deployable on Cloudflare Workers, Vercel, Node.js, or Docker.</b></p>
