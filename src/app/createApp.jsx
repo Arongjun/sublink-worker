@@ -16,6 +16,7 @@ import { ShortLinkService } from '../services/shortLinkService.js';
 import { ConfigStorageService } from '../services/configStorageService.js';
 import { ServiceError, MissingDependencyError } from '../services/errors.js';
 import { normalizeRuntime } from '../runtime/runtimeConfig.js';
+import { registerAdminRoutes } from '../admin/routes.jsx';
 import { PREDEFINED_RULE_SETS, SING_BOX_CONFIG, SING_BOX_CONFIG_V1_11, generateSubconverterConfig } from '../config/index.js';
 
 const DEFAULT_USER_AGENT = 'curl/7.74.0';
@@ -36,6 +37,8 @@ export function createApp(bindings = {}) {
         c.set('t', createTranslator(lang));
         await next();
     });
+
+    registerAdminRoutes(app, runtime);
 
     app.get('/', (c) => {
         const t = c.get('t');

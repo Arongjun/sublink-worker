@@ -31,6 +31,15 @@ export class MemoryKVAdapter {
         this.clearExpiration(key);
     }
 
+    async list({ cursor, limit = 1000, prefix = '' } = {}) {
+        const keys = [...this.store.keys()].filter((k) => k.startsWith(prefix) && !this.isExpired(k)).sort();
+        const start = cursor ? Number(cursor) : 0;
+        const slice = keys.slice(start, start + limit);
+        const end = start + slice.length;
+        const complete = end >= keys.length;
+        return { keys: slice.map((name) => ({ name })), list_complete: complete, cursor: complete ? undefined : String(end) };
+    }
+
     scheduleExpiration(key, ttlSeconds) {
         this.clearExpiration(key);
         const expireAt = Date.now() + ttlSeconds * 1000;
